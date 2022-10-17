@@ -1,0 +1,9 @@
+:~  title+'Comet Blessing'
+    info+'Allow other ships to vouch for comets.'
+    image+'https://hanfel-dovned.sfo3.digitaloceanspaces.com/bless-icon.png'
+    base+'bless'
+    site+/apps/bless
+    version+[1 0 0]
+    website+'https://urbit.org'
+    license+'MIT'
+==
