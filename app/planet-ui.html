@@ -1,0 +1,110 @@
+<head>
+  <style>
+    div { text-align: center; }
+    button { text-align: center; }
+  </style>
+  <title>Comet Blessing</title>
+</head>
+
+<body>
+  <main>
+    <div id="blessing"></div>
+    <p></p>
+    <div id="interrogate"></div>
+    <script>
+    
+
+function post(tag, data) {
+    fetch('/apps/bless', {
+        method: 'POST',
+        body: JSON.stringify({[tag]: data})
+    })
+    location.reload()
+}
+
+getState()
+    .then((state) => renderPage(state))
+
+async function getState() {
+    const response = await fetch('/apps/bless/state')
+    return response.json()
+}
+
+const blessing = document.getElementById("blessing");
+const interrogate = document.getElementById("interrogate");
+
+function bless()
+{
+    post("send-blessing", document.getElementById('blessBox').value);
+}
+
+function unbless()
+{
+    post("send-unblessing", "~" + document.getElementById('blessDumb').value);
+}
+
+function interrogation()
+{
+    post("investigate", document.getElementById('interoBox').value);
+}
+
+function renderPage(state)
+{
+  if(state == 0)
+  {
+      const blessingText = document.createElement("div");
+      blessingText.textContent = "You are currently blessing no one.";
+      blessing.appendChild(blessingText);
+
+      const blessBox = document.createElement('input'); 
+      blessBox.type = "text"; 
+      blessBox.id = "blessBox";
+      blessing.appendChild(blessBox);
+
+      const blessButton = document.createElement("button");
+      //blessButton.classList.add("button");
+      blessButton.textContent = "Bless a Comet";
+      blessButton.addEventListener('click', bless);
+      blessing.appendChild(blessButton);
+  }
+  else
+  {
+      const blessingText = document.createElement("div");
+      blessingText.textContent = "You are currently blessing ~" + state;
+      blessing.appendChild(blessingText);
+
+      const blessDumb = document.createElement('div'); 
+      blessDumb.id = "blessDumb";
+      blessDumb.value = state;
+      blessing.appendChild(blessDumb);      
+      
+      const unblessButton = document.createElement("button");
+      //blessButton.classList.add("button");
+      unblessButton.textContent = "Unbless ~" + state;
+      unblessButton.addEventListener('click', unbless);
+      blessing.appendChild(unblessButton);
+  }
+
+  const interrogateText = document.createElement("div");
+  interrogateText.textContent = "Interrogate a comet using the button below.";
+  interrogate.appendChild(interrogateText);
+
+  const interrogateTextTwo = document.createElement("div");
+  interrogateTextTwo.textContent = "You'll receive its confession in your terminal app.";
+  interrogate.appendChild(interrogateTextTwo);
+  
+  const interoBox = document.createElement('input'); 
+  interoBox.type = "text"; 
+  interoBox.id = "interoBox";
+  interrogate.appendChild(interoBox);
+
+  const interoButton = document.createElement("button");
+  //blessButton.classList.add("button");
+  interoButton.textContent = "Interrogate";
+  interoButton.addEventListener('click', interrogation);
+  interrogate.appendChild(interoButton);
+
+}
+
+</script>
+</main>

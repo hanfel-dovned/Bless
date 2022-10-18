@@ -1,6 +1,6 @@
 :~  title+'Comet Blessing'
     info+'Allow other ships to vouch for comets.'
-    color+0xf9.8e40
+    color+0x10.f7fc
     image+'https://hanfel-dovned.sfo3.digitaloceanspaces.com/bless-icon.png'
     base+'bless'
     site+/apps/bless

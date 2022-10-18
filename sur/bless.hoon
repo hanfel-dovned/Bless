@@ -2,8 +2,8 @@
 +$  action
   $%  [%send-blessing =ship]
       [%send-unblessing =ship]
-      [%bless]
-      [%unbless]
+      [%bless ~]
+      [%unbless ~]
       [%investigate =ship]
   ==
 +$  confession  ?

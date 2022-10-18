@@ -3,6 +3,7 @@
     div { text-align: center; }
     button { text-align: center; }
   </style>
+   <title>Comet Blessing</title>
 
 </head>
 
@@ -35,9 +36,20 @@ const scores = document.getElementById("scores");
 
 function renderPage(state)
 {
-  state.sort(function(a, b) {
-      return b[1] - a[1];
-  })
+  //if linked = 0
+    //"you are curently blessing no one"
+    //text field
+    //"Bless a Comet" button
+
+  //if linked = 1
+    //"you are currently blessing " + linked
+    //"Unbless"
+
+  //"Interogate any comet using the button below."
+  //"You'll receive its confession in your terminal app."
+  //text field
+  //Investigate button
+
   for(var i = 0; i < state.length; i++)
   {
       const newScore = document.createElement("div");
