@@ -6,4 +6,5 @@
       [%unbless]
       [%investigate =ship]
   ==
++$  confession  ?
 --

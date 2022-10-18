@@ -50,14 +50,14 @@
       ?>  =(src.bowl our.bowl)
       ?>  (lte our.bowl 0xffff.ffff)
       :_  this(linked [~ ship:action])
-      :~  [%pass /bless %agent [ship:action %bless] %poke %bless-action !>(%bless)]
+      :~  [%pass /blessing %agent [ship:action %bless] %poke %bless-action !>(%bless)]
       ==
       ::
         %send-unblessing
       ?>  =(src.bowl our.bowl)
       ?>  (lte our.bowl 0xffff.ffff)
       :_  this(linked [~])
-      :~  [%pass /bless %agent [ship:action %bless] %poke %bless-action !>(%unbless)]
+      :~  [%pass /blessing %agent [ship:action %bless] %poke %bless-action !>(%unbless)]
       ==
       ::
         %bless
@@ -75,17 +75,48 @@
       ?>  =(+.linked src.bowl)
       `this(linked [~])
       ::
-        
-
-
-
-
-      
+        %investigate
+      ?>  =(src.bowl our.bowl)
+      ?>  (lte our.bowl 0xffff.ffff)
+      :_  this
+      :~  [%pass /investigate %agent [ship:action %bless] %watch /confession]
+      ==
+    ::
   ==
+::
 ++  on-peek  on-peek:def
-++  on-watch  on-watch:def
+++  on-watch
+  |=  =path
+  ^-  (quip card _this)
+  ?+    path  (on-watch:def path)
+      [%investigate ~]
+    :_  this
+    :~  ?:  =(linked [~])
+          [%give %fact ~ %bless-confession !>(`confession:bless`%.n)]
+        [%give %fact ~ %bless-confession !>(`confession:bless`%.y)]
+        [%give %kick ~[/investigate] ~]
+    ==
+  ==
+::
 ++  on-leave  on-leave:def
-++  on-agent  on-agent:def
+++  on-agent
+  |=  [=wire =sign:agent:gall]
+  ^-  (quip card _this)
+  ?+    wire  (on-agent:def wire sign)
+      [%blessing ~]
+    ?>  =(%poke-ack -.sign)
+    (on-agent:def wire sign)
+    ::
+      [%investigate ~]
+    ?>  =(%fact -.sign)
+    ?>  =(%bless-confession p.cage.sign)
+    ?:  !<(confession:bless q.cage.sign)
+      ~&  "{(scow %p src.bowl)} is blessed!"
+      `this
+    ~&  "{(scow %p src.bowl)} is not blessed."
+    `this
+  ==
+::
 ++  on-arvo  on-arvo:def
 ++  on-fail  on-fail:def
 --
