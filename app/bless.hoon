@@ -8,9 +8,9 @@
 +$  state-0  linked=(unit @p)
 --
 %-  agent:dbug
-=|  state
-=*  state  -
 ^-  agent:gall
+=|  state-0
+=*  state  -
 |_  =bowl:gall
 +*  this  .
     def  ~(. (default-agent this %.n) bowl)
@@ -28,23 +28,24 @@
   !>(state)
 ::
 ++  on-load
-  |=  =vase
+  |=  old-state=vase
   ^-  (quip card _this)
-  `this(state !<(_state vase))
+  =/  old  !<(state-0 old-state)
+  `this(state old)
 ::
 ++  on-poke
   |=  [=mark =vase]
   ^-  (quip card _this)
-  |^
+  ::|^
   ?+    mark  (on-poke:def mark vase)
-      %handle-http-request
-    ?>  =(src.bowl our.bowl)
-    =^  cards  state
-      (handle-http !<([@ta =inbound-request:eyre] vase))
-    [cards this]
+   ::   %handle-http-request
+   :: ?>  =(src.bowl our.bowl)
+   :: =^  cards  state
+   ::   (handle-http !<([@ta =inbound-request:eyre] vase))
+   :: [cards this]
     ::
       %bless-action
-    =/  action  !<(?(action:bless vase))
+    =/  action  !<(action:bless vase)
     ?-    -.action
         %send-blessing
       ?>  =(src.bowl our.bowl)
@@ -81,7 +82,7 @@
       :_  this
       :~  [%pass /investigate %agent [ship:action %bless] %watch /confession]
       ==
-    ::
+    ==
   ==
 ::
 ++  on-peek  on-peek:def
