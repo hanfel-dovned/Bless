@@ -1,13 +1,19 @@
 <head>
   <style>
-    div { text-align: center; }
-    button { text-align: center; }
+    body { 
+      background-color: black; 
+      font-family: "arial"; 
+      color: 10f7fc;
+      text-align: center;
+      border-radius: 5;
+    }
   </style>
   <title>Comet Blessing</title>
 </head>
 
 <body>
   <main>
+    <h1>Comet Blessing</h1>
     <div id="blessing"></div>
     <p></p>
     <div id="interrogate"></div>
@@ -70,7 +76,7 @@ function renderPage(state)
   else
   {
       const blessingText = document.createElement("div");
-      blessingText.textContent = "You are currently blessing ~" + state;
+      blessingText.textContent = "You are currently blessing ~" + state + ".";
       blessing.appendChild(blessingText);
 
       const blessDumb = document.createElement('div'); 

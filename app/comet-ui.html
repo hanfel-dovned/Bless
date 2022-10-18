@@ -1,61 +1,48 @@
 <head>
   <style>
-    div { text-align: center; }
-    button { text-align: center; }
+    body { 
+      background-color: black; 
+      font-family: "arial"; 
+      color: 10f7fc;
+      text-align: center;
+      border-radius: 5;
+    }
   </style>
-   <title>Comet Blessing</title>
-
+  <title>Comet Blessing</title>
 </head>
 
 <body>
   <main>
-    <p> </p>
-    <div><button onclick="postClick()">Click</button></div>
-    <p> </p>
-    <div id="scores"></div>
+    <h1>Comet Blessing</h1>
+    <div id="blessing"></div>
+    <p></p>
+    <div id="interrogate"></div>
     <script>
     
-
-function postClick() {
-    fetch('/apps/click', {
-        method: 'POST',
-        body: 0
-    })
-    location.reload()
-}
 
 getState()
     .then((state) => renderPage(state))
 
 async function getState() {
-    const response = await fetch('/apps/click/state')
+    const response = await fetch('/apps/bless/state')
     return response.json()
 }
 
-const scores = document.getElementById("scores");
+const blessing = document.getElementById("blessing");
 
 function renderPage(state)
 {
-  //if linked = 0
-    //"you are curently blessing no one"
-    //text field
-    //"Bless a Comet" button
-
-  //if linked = 1
-    //"you are currently blessing " + linked
-    //"Unbless"
-
-  //"Interogate any comet using the button below."
-  //"You'll receive its confession in your terminal app."
-  //text field
-  //Investigate button
-
-  for(var i = 0; i < state.length; i++)
+  if(state == 0)
   {
-      const newScore = document.createElement("div");
-      newScore.textContent = "~" + state[i][0] + " " + state[i][1];
-      scores.appendChild(newScore);
-      console.log(newScore);
+      const blessingText = document.createElement("div");
+      blessingText.textContent = "You are currently blessed by no one.";
+      blessing.appendChild(blessingText);
+  }
+  else
+  {
+      const blessingText = document.createElement("div");
+      blessingText.textContent = "You are currently blessed by ~" + state + ".";
+      blessing.appendChild(blessingText);
   }
 }
 
